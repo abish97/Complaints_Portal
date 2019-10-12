@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Complaint Detail{% endblock %}
+
+{% block body_block %}
+
+<h1>{{ complaint.heading }}</h1>
+<h2>Department: {{complaint.department}}</h3>
+<p>{{complaint.text|safe|linebreaksbr}}</p>
+<p>Filed On: {{complaint.created_date }}</p>
+<p>Status: {{ complaint.get_status_display }}</p>
+<p>Registeration Number of Grievant: {{complaint.grievant.Registeration}}</p>
+<p>Room Number: {{complaint.grievant.Room}}</p>
+<p>Hostel: {{complaint.grievant.Hostel}}</p>
+{% if complaint.media %}
+<img src="{{ complaint.media.url }}" height="100px" width="100px" >
+{% endif %}
+{% if user.is_active and user.is_grievant%}
+<a  class="btn btn-primary btn-large" href="{% url 'grievant_complaint_list' pk=user.id%}">All Complaints</a>
+{% elif user.is_active and user.is_department %}
+<p>
+<a class="btn btn-primary btn-large" href="{% url 'department_complaint_list' pk=user.id%}">All Complaints</a>
+<a class="btn btn-success btn-large" href="{% url 'update_complaint' pk=complaint.pk %}">Update Complaint</a>
+</p>
+{% endif %}
+{% endblock %}

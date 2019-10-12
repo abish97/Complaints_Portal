@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title%}Complaints List{% endblock %}
+{% block body_block %}
+<div class="container">
+  <div class="jumbotron">
+    <h3>Welcome:{{user.username}}</h3>
+    <table>
+      <tr>
+        <th>Heading</th>
+        <th>Department</th>
+        <th>Created Date</th>
+        <th>Status</th>
+        <th>Full Details</th>
+      </tr>
+      {% for complaint in complaint_list %}
+      {% if complaint.status != 'D' %}
+      <tr>
+        <td>{{complaint.heading}}</td>
+        <td>{{complaint.department}}</td>
+        <td>{{complaint.created_date|date:"D M Y"}}</td>
+        <td>{{complaint.get_status_display}}</td>
+        <td><a class="btn btn-primary" href="{% url 'complaint_detail' pk=complaint.pk%}">Details</a></td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </table>
+    <p>
+      <a class="btn btn-success btn-large" href="{% url 'create_complaint' %}">File Complaint</a>
+  </div>
+</div>
+
+{% endblock %}

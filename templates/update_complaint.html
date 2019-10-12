@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}Update Complaint{% endblock %}
+
+{% block body_block %}
+
+<form method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit" class="btn btn-warning">Submit Changes</button>
+</form>
+
+
+
+
+
+{% endblock %}

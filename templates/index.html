@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body_block%}
+
+<h1>Welcome To The Grievants Portal</h1>
+
+{% if user.is_active %}
+<h1>Thanks For registering</h1>
+{% else %}
+<h2>Select What you are</h2>
+<p>
+  <a class="btn btn-primary btn-lg" href="{% url 'student_register' %}">Student</a>
+  <a class="btn btn-success btn-lg" href="{% url 'department_register' %}">Department Head</a>
+</p>
+{% endif %}
+
+{% endblock%}

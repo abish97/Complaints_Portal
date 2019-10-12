@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}Department Complaint List{% endblock %}
+
+{% block body_block %}
+
+<h1>The Department is {{user.department.get_department_name_display}}</h1>
+<h2>Welcome: {{user.username}}</h2>
+
+<table>
+  <tr>
+    <th>Grievant Registeration Number</th>
+    <th>Heading</th>
+    <th>Created Date</th>
+    <th>Status</th>
+    <th>Details</th>
+  </tr>
+  {% for complaint in complaint_list %}
+  {% if complaint.status != 'D' %}
+  <tr>
+    <td>{{complaint.grievant.Registeration}}</td>
+    <td>{{complaint.heading}}</td>
+    <td>{{complaint.created_date}}</td>
+    <td>{{complaint.get_status_display}}</td>
+    <td><a class="btn btn-primary" href="{% url 'complaint_detail' pk=complaint.pk%}">Details</a></td>
+  </tr>
+  {% endif %}
+  {% endfor %}
+</table>
+
+{% endblock %}
