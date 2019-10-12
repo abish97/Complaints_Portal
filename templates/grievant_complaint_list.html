@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block title%}Complaints List{% endblock %}
 {% block body_block %}
 <div class="container">
   <div class="jumbotron">
     <h3>Welcome:{{user.username}}</h3>
-    <table>
+    <table class="list">
       <tr>
         <th>Heading</th>
         <th>Department</th>

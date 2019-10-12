@@ -1,6 +1,7 @@
-table{
-  border: 3px pink ;
+#list{
+  border: 3px solid pink;
 }
 body{
-  background-color: blue;
+  background-color: green;
+  opacity: 10%;
 }
