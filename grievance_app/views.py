@@ -78,27 +78,31 @@ def grievant_register(request):
     registered = False
 
     if request.method == 'POST':
-        if Grievant.objects.filter(Registeration=request.POST['Registeration']).count() >0:
-            response = {}
-            response['error'] = 'This Registeration Number already exists'
-            return render(request,'student_register.html',response)
-        user_form = SignUpForm(data=request.POST)
-        profile_form = GrievantProfileForm(data=request.POST)
+            user_form = SignUpForm(data=request.POST)
+            profile_form = GrievantProfileForm(data=request.POST)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save(commit=False)
-            user.set_password(user.password)
-            user.is_grievant = True
-            user.save()
+            if Grievant.objects.filter(Registeration=request.POST['Registeration']).count() >0:
+                response = {}
+                response['error'] = 'This Registeration Number already exists'
+                return render(request,'student_register.html',{
+                'user_form':user_form,
+                'profile_form':profile_form,
+                'response':response,})
+            else:
+                if user_form.is_valid() and profile_form.is_valid():
+                    user = user_form.save(commit=False)
+                    user.set_password(user.password)
+                    user.is_grievant = True
+                    user.save()
 
-            profile = profile_form.save(commit=False)
-            profile.student = user
-            profile.save()
+                    profile = profile_form.save(commit=False)
+                    profile.student = user
+                    profile.save()
 
-            registered = True
-        else:
-            print(user_form.errors,profile_form.errors)
-        return redirect('/')
+                    registered = True
+                else:
+                    print(user_form.errors,profile_form.errors)
+                return redirect('user_login')
     else:
         user_form = SignUpForm()
         profile_form = GrievantProfileForm()
@@ -113,27 +117,32 @@ def department_register(request):
     registered = False
 
     if request.method == 'POST':
-        if Department.objects.filter(department_name=request.POST['department_name']).count() >0:
-            response = {}
-            response['error'] = 'This Department already exists'
-            return render(request,'department_register.html',response)
         user_form = SignUpForm(data=request.POST)
         profile_form = DepartmentProfileForm(data=request.POST)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save(commit=False)
-            user.set_password(user.password)
-            user.is_department = True
-            user.save()
-
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
-
-            registered = True
+        if Department.objects.filter(department_name=request.POST['department_name']).count() >0:
+            response = {}
+            response['error'] = 'This Department already exists'
+            return render(request,'department_register.html',{
+            'user_form':user_form,
+            'profile_form':profile_form,
+            'response':response,})
         else:
-            print(user_form.errors,profile_form.errors)
-        return redirect('/')
+
+            if user_form.is_valid() and profile_form.is_valid():
+                user = user_form.save(commit=False)
+                user.set_password(user.password)
+                user.is_department = True
+                user.save()
+
+                profile = profile_form.save(commit=False)
+                profile.user = user
+                profile.save()
+
+                registered = True
+            else:
+                print(user_form.errors,profile_form.errors)
+            return redirect('user_login')
     else:
         user_form = SignUpForm()
         profile_form = DepartmentProfileForm()

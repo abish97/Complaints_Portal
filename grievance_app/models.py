@@ -19,7 +19,7 @@ class Grievant(models.Model):
 
 class Department(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
-    choices = [('Pl','Plumbing'),('Ca','Carpentry'),('El','Electricity'),('La','Lan Network')]
+    choices = [('Pl','Plumbing'),('Ca','Carpentry'),('El','Electricity'),('La','Lan Network'),('Li','Library'),]
     department_name = models.CharField(choices=choices,max_length=2,default='Pl')
 
     def __str__(self):
