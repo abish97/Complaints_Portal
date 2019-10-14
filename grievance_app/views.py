@@ -92,7 +92,7 @@ def grievant_register(request):
             user.save()
 
             profile = profile_form.save(commit=False)
-            profile.user = user
+            profile.student = user
             profile.save()
 
             registered = True
