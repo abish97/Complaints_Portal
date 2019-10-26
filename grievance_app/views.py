@@ -82,8 +82,7 @@ def grievant_register(request):
             profile_form = GrievantProfileForm(data=request.POST)
 
             if Grievant.objects.filter(Registeration=request.POST['Registeration']).count() >0:
-                response = {}
-                response['error'] = 'This Registeration Number already exists'
+                response = 'This Registeration Number already exists'
                 return render(request,'student_register.html',{
                 'user_form':user_form,
                 'profile_form':profile_form,
@@ -121,8 +120,8 @@ def department_register(request):
         profile_form = DepartmentProfileForm(data=request.POST)
 
         if Department.objects.filter(department_name=request.POST['department_name']).count() >0:
-            response = {}
-            response['error'] = 'This Department already exists'
+
+            response = 'This Department already exists'
             return render(request,'department_register.html',{
             'user_form':user_form,
             'profile_form':profile_form,

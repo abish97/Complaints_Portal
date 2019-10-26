@@ -9,7 +9,7 @@
       {% if registered %}
         <h1>Thank you for registering!</h1>
       {% elif response %}
-        <h3>This Department Already exists. Try another one</h3>
+        <h3>{{response}}</h3>
         <form enctype="multipart/form-data" method="POST">
           {% csrf_token %}
           {{ user_form.as_p }}
